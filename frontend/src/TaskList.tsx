@@ -15,8 +15,8 @@ export const TaskList = () => {
   };
 
   return (
-    <div>
-      <div className="flex-row space-x-3">
+    <div className="p-4">
+      <div className="space-x-3 mb-2">
         <Button variant="contained" color="success">
           <Link to={`add`}>Add</Link>
         </Button>

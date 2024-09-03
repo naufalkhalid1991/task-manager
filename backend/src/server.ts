@@ -10,7 +10,9 @@ app.use(express.json())
 app.use(cors(corsOptions))
 app.use("/tasks", router)
 
-mongoose.connect('mongodb+srv://@cluster0.2klxm5x.mongodb.net/tasks?retryWrites=true&w=majority&appName=Cluster0')
+const MONGODB_URL=process.env.MONGODB_URL
+
+mongoose.connect(MONGODB_URL as string)
 
 app.listen(3000, () => {
     return console.log("server started")

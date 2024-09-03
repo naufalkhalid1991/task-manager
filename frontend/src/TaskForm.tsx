@@ -36,78 +36,81 @@ export const TaskForm = () => {
   }, [data, reset]);
 
   if (pathname.includes("edit") && isLoading) return <div></div>;
-  else
-    return (
-      <div>
-        <Button variant="contained" color="success">
-          <Link to={"/"}>Back</Link>
-        </Button>
-        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label
-              htmlFor="title"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Title
-            </label>
-            <input
-              {...register("title", { required: true })}
-              name="title"
-              id="title"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            ></input>
-          </div>
-          <div>
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Description
-            </label>
-            <textarea
-              {...register("description", { required: true })}
-              name="description"
-              id="description"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            ></textarea>
-          </div>
-          <div>
-            <label
-              htmlFor="priority"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Priority
-            </label>
-            {!isLoading && (
-              <Select
-                {...register("priority")}
-                onChange={handleSelectItems}
-                className="w-72 rounded"
-                defaultValue={data?.priority}
-                label="priority"
-              >
-                {taskPriority.map((option) => (
-                  <MenuItem
-                    key={option}
-                    value={option}
-                    disabled={option === "undefined"}
-                  >
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
-            )}
-          </div>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className="w-full"
-            disabled={!isValid}
+  return (
+    <div className="p-4 flex flex-col space-y-2">
+      <Button
+        variant="contained"
+        color="success"
+        className="flex space-x-2 w-4"
+      >
+        <Link to={"/"}>Back</Link>
+      </Button>
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700"
           >
-            {pathname.includes("add") ? "Add" : "Save"}
-          </Button>
-        </form>
-      </div>
-    );
+            Title
+          </label>
+          <input
+            {...register("title", { required: true })}
+            name="title"
+            id="title"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          ></input>
+        </div>
+        <div>
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Description
+          </label>
+          <textarea
+            {...register("description", { required: true })}
+            name="description"
+            id="description"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          ></textarea>
+        </div>
+        <div>
+          <label
+            htmlFor="priority"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Priority
+          </label>
+          {!isLoading && (
+            <Select
+              {...register("priority")}
+              onChange={handleSelectItems}
+              className="w-72 rounded"
+              defaultValue={data?.priority}
+              label="priority"
+            >
+              {taskPriority.map((option) => (
+                <MenuItem
+                  key={option}
+                  value={option}
+                  disabled={option === "undefined"}
+                >
+                  {option}
+                </MenuItem>
+              ))}
+            </Select>
+          )}
+        </div>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="w-5"
+          disabled={!isValid}
+        >
+          {pathname.includes("add") ? "Add" : "Save"}
+        </Button>
+      </form>
+    </div>
+  );
 };
